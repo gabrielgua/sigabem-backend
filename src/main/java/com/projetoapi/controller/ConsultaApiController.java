@@ -20,7 +20,7 @@ public class ConsultaApiController {
     }
 
     @GetMapping("/consultar/{cep}")
-    public ResponseEntity<?> buscarCepPorCodigo(@PathVariable("cep") Long cep) {
+    public ResponseEntity<?> buscarCepPorCodigo(@PathVariable("cep") String cep) {
         ConsultaApi consultaApi = service.buscarCep(cep);
         return ResponseEntity.ok().body(consultaApi);
     }

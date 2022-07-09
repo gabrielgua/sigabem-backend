@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class ConsultaApiService {
 
-    public ConsultaApi buscarCep(Long cep) {
+    public ConsultaApi buscarCep(String cep) {
 
         RestTemplate restTemplate = new RestTemplate();
         RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
