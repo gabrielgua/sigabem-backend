@@ -25,6 +25,6 @@ public class Frete {
     private String cepDestino;
     private String nomeDestinatario;
     private double vlTotalFrete;
-    private LocalDateTime dataConsulta;
+    private LocalDateTime dataConsulta = LocalDateTime.now();
     private LocalDateTime dataPrevistaEntrega;
 }
