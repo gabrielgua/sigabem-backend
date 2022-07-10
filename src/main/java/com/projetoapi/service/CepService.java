@@ -1,20 +1,20 @@
 package com.projetoapi.service;
 
-import com.projetoapi.model.ConsultaApi;
+import com.projetoapi.model.Cep;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class ConsultaApiService {
+public class CepService {
 
-    public ConsultaApi buscarCep(String cep) {
+    public Cep buscarCep(String cep) {
 
         RestTemplate restTemplate = new RestTemplate();
         RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
         restTemplate = restTemplateBuilder.build();
 
-        ConsultaApi consultaApi = restTemplate.getForObject("https://viacep.com.br/ws/"+cep+"/json", ConsultaApi.class);
+        Cep consultaApi = restTemplate.getForObject("https://viacep.com.br/ws/"+cep+"/json", Cep.class);
         return consultaApi;
     }
 }

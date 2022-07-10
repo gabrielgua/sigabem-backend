@@ -1,10 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Consulta</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 </head>
 <body>
-<h1>Consultar o valor do Frete por CEP</h1>
+<div class="header">
+    <i class="material-icons md-48">local_shipping</i>
+    <h2>Siga Bem</h2>
+</div>
+<div class="box-central">
+    <div class="titulo">
+        <h1>Calcular Frete</h1>
+    </div>
+    <div class="forms">
+        <div class="div-form">
+            <form th:action="@{/frete/html}" th:object="${frete}" method="POST" class="form">
+                <div class="form-input">
+                    <label for="peso" class="label">Peso</label>
+                    <input type="text" class="input-form" id="peso" placeholder="Peso da encomenda. Kgs" th:field="*{peso}" required>
+                </div>
+                <div class="form-input">
+                    <label for="cepOrigem" class="label">Origem</label>
+                    <input type="text" class="input-form" id="cepOrigem" placeholder="CEP de origem da encomenda." th:field="*{cepOrigem}" required>
+                </div>
+                <div class="form-input">
+                    <label for="cepDestino" class="label">Destino</label>
+                    <input type="text" class="input-form" id="cepDestino" placeholder="CEP de destino da encomenda." th:field="*{cepDestino}" required>
+                </div>
+                <div class="form-input">
+                    <label for="nomeDestinatario" class="label">Nome</label>
+                    <input type="text" class="input-form" id="nomeDestinatario" placeholder="Nome do Destinatário." th:field="*{nomeDestinatario}" required>
+                </div>
+                <input type="hidden" th:field="*{id}">
+
+                <button type="submit" class="btn">Calcular</button>
+            </form>
+        </div>
+
+        <div class="div-res" th:if="${freteDTO != null}">
+            <form th:action="@{/}" th:object="${freteDTO}" class="form">
+                <div class="form-input-res">
+                    <label for="vlTotalFrete" class="label">Valor total do Frete</label>
+                    <input type="text" class="input-form-res" id="vlTotalFrete" th:field="*{vlTotalFrete}" disabled>
+                </div>
+                <div class="form-inpu-rest">
+                    <label for="cepOrigem" class="label">Origem</label>
+                    <input type="text" class="input-form-res" id="cepOrigem" th:field="*{cepOrigem}" disabled>
+                </div>
+                <div class="form-input-res">
+                    <label for="cepDestino" class="label">Destino</label>
+                    <input type="text" class="input-form-res" id="cepDestino" th:field="*{cepDestino}" disabled>
+                </div>
+                <div class="form-input-res">
+                    <label for="dataPrevistaEntrega" class="label">Data Prevista de Entrega</label>
+                    <input type="text" class="input-form-res" id="dataPrevistaEntrega" th:field="*{dataPrevistaEntrega}" disabled>
+                </div>
+                <button type="submit" class="btn">Calcular novamente</button>
+            </form>
+        </div>
+    </div>
+
+</div>
 </body>
 </html>

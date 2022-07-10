@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class ConsultaApi {
+public class Cep {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
