@@ -1,10 +1,10 @@
 package com.projetoapi.model;
 
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
@@ -16,7 +16,8 @@ import javax.persistence.Id;
 public class Cep {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "cep_increment")
+    @GenericGenerator(name = "cep_increment", strategy = "increment")
     private Long id;
 
     private String cep;
