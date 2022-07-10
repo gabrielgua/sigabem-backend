@@ -10,11 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("frete")
@@ -29,11 +28,13 @@ public class FreteController {
         return ResponseEntity.ok().body(freteDTO);
     }
 
-    @PostMapping("/html")
-    public String salvarFreteHtml(@Valid Frete frete, ModelMap model) throws JsonProcessingException {
-        FreteDTO freteDTO = service.salvar(frete);
-        model.addAttribute("frete", frete);
-        model.addAttribute("freteDTO", freteDTO);
-        return "index";
+    @GetMapping
+    public ResponseEntity<List<Frete>> buscarTodos() {
+        return ResponseEntity.ok().body(service.buscarTodos());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Frete> buscarFretePorId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok().body(service.buscarPorId(id));
     }
 }

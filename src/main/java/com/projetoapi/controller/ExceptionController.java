@@ -1,7 +1,9 @@
 package com.projetoapi.controller;
 
+import com.projetoapi.exception.ObjectNotFoundException;
 import com.projetoapi.exception.StandardError;
 import com.projetoapi.exception.ValidationError;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -53,6 +55,19 @@ public class ExceptionController {
                 HttpStatus.BAD_REQUEST.value(),
                 "Validation Error",
                 "CEP inválido!",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler(ObjectNotFoundException.class)
+    public ResponseEntity<StandardError> objectNotFoundException(ObjectNotFoundException ex, HttpServletRequest request) {
+        StandardError error = new StandardError(
+                System.currentTimeMillis(),
+                HttpStatus.BAD_REQUEST.value(),
+                "Object not Found",
+                ex.getMessage(),
                 request.getRequestURI()
         );
 

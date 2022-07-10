@@ -1,15 +1,16 @@
 package com.projetoapi.service;
 
+import com.projetoapi.exception.ObjectNotFoundException;
 import com.projetoapi.model.Cep;
 import com.projetoapi.model.Frete;
 import com.projetoapi.model.FreteDTO;
 import com.projetoapi.repository.FreteRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,6 +21,16 @@ public class FreteService {
 
     @Autowired
     private FreteRepository repository;
+
+    @Transactional(readOnly = true)
+    public Frete buscarPorId(Long id) {
+        return repository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Frete não encontrado, id: "+id));
+    }
+
+    @Transactional(readOnly = true)
+    public List<Frete> buscarTodos() {
+        return repository.findAll();
+    }
 
     @Transactional(readOnly = false)
     public FreteDTO salvar(Frete frete) {
@@ -49,7 +60,7 @@ public class FreteService {
         return apiService.buscarCep(cep);
     }
 
-    @Transactional(readOnly = true)
+
     public BigDecimal getDesconto(Cep cepO, Cep cepD) {
         BigDecimal desconto = BigDecimal.valueOf(0);
         if (cepO.getUf().equals(cepD.getUf())) {
@@ -61,7 +72,6 @@ public class FreteService {
         return desconto;
     }
 
-    @Transactional(readOnly = true)
     public Integer getDias(Cep cepO, Cep cepD) {
         int dias = 10;
         if (cepO.getUf().equals(cepD.getUf())) {
