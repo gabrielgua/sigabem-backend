@@ -20,7 +20,7 @@
             <form th:action="@{/frete/html}" th:object="${frete}" method="POST" class="form">
                 <div class="form-input">
                     <label for="peso" class="label">Peso</label>
-                    <input type="text" class="input-form" id="peso" placeholder="Peso da encomenda. Kgs" th:field="*{peso}" required>
+                    <input type="number" class="input-form" id="peso" placeholder="Peso da encomenda. Kgs" th:field="*{peso}" required>
                 </div>
                 <div class="form-input">
                     <label for="cepOrigem" class="label">Origem</label>

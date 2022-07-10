@@ -36,8 +36,4 @@ public class FreteController {
         model.addAttribute("freteDTO", freteDTO);
         return "index";
     }
-
-
-
-
 }
